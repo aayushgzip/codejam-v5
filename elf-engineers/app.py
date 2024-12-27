@@ -103,7 +103,7 @@ def login():
         
         if not email or not password:
             flash('Please provide both email and password.', 'error')
-            return redirect(url_for('home'))
+            return redirect(url_for('login'))
 
         user = User.query.filter_by(email=email).first()
 
@@ -114,7 +114,7 @@ def login():
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid email or password. Please try again.', 'error')
-            return redirect(url_for('home'))
+            return redirect(url_for('login'))
     
     return render_template('login.html')
 
@@ -315,6 +315,9 @@ def logout():
         flash('Logged out successfully.', 'success')
 
     return redirect(url_for('home'))
+@app.route('/About')
+def About():
+    return render_template('About.html')
 if __name__ == "__main__":
     with app.app_context():
         db.create_all() 
